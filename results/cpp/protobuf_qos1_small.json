@@ -1,0 +1,62 @@
+[
+  {
+    "lang": "cpp",
+    "role": "pub",
+    "enc": "protobuf",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 89,
+    "pub_ms": 0.52,
+    "recv_ms": 0.22,
+    "tps": 1900,
+    "ts": "2024-01-15T10:47:00Z"
+  },
+  {
+    "lang": "cpp",
+    "role": "pub",
+    "enc": "protobuf",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 89,
+    "pub_ms": 0.58,
+    "recv_ms": 0.26,
+    "tps": 1700,
+    "ts": "2024-01-15T10:47:01Z"
+  },
+  {
+    "lang": "cpp",
+    "role": "pub",
+    "enc": "protobuf",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 89,
+    "pub_ms": 0.55,
+    "recv_ms": 0.24,
+    "tps": 1800,
+    "ts": "2024-01-15T10:47:02Z"
+  },
+  {
+    "lang": "cpp",
+    "role": "pub",
+    "enc": "protobuf",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 89,
+    "pub_ms": 0.61,
+    "recv_ms": 0.28,
+    "tps": 1600,
+    "ts": "2024-01-15T10:47:03Z"
+  },
+  {
+    "lang": "cpp",
+    "role": "pub",
+    "enc": "protobuf",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 89,
+    "pub_ms": 0.56,
+    "recv_ms": 0.25,
+    "tps": 1750,
+    "ts": "2024-01-15T10:47:04Z"
+  }
+]

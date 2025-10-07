@@ -1,0 +1,62 @@
+[
+  {
+    "lang": "rust",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 0.85,
+    "recv_ms": 0.4,
+    "tps": 1200,
+    "ts": "2024-01-15T10:36:00Z"
+  },
+  {
+    "lang": "rust",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 0.92,
+    "recv_ms": 0.5,
+    "tps": 1100,
+    "ts": "2024-01-15T10:36:01Z"
+  },
+  {
+    "lang": "rust",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 0.78,
+    "recv_ms": 0.3,
+    "tps": 1300,
+    "ts": "2024-01-15T10:36:02Z"
+  },
+  {
+    "lang": "rust",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 0.88,
+    "recv_ms": 0.4,
+    "tps": 1200,
+    "ts": "2024-01-15T10:36:03Z"
+  },
+  {
+    "lang": "rust",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 0.95,
+    "recv_ms": 0.5,
+    "tps": 1100,
+    "ts": "2024-01-15T10:36:04Z"
+  }
+]

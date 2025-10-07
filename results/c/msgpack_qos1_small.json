@@ -1,0 +1,62 @@
+[
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 0.38,
+    "recv_ms": 0.15,
+    "tps": 2500,
+    "ts": "2024-01-15T10:41:00Z"
+  },
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 0.42,
+    "recv_ms": 0.18,
+    "tps": 2300,
+    "ts": "2024-01-15T10:41:01Z"
+  },
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 0.35,
+    "recv_ms": 0.12,
+    "tps": 2800,
+    "ts": "2024-01-15T10:41:02Z"
+  },
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 0.44,
+    "recv_ms": 0.20,
+    "tps": 2200,
+    "ts": "2024-01-15T10:41:03Z"
+  },
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 0.39,
+    "recv_ms": 0.16,
+    "tps": 2400,
+    "ts": "2024-01-15T10:41:04Z"
+  }
+]

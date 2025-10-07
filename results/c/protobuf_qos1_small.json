@@ -1,0 +1,62 @@
+[
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "protobuf",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 89,
+    "pub_ms": 0.35,
+    "recv_ms": 0.12,
+    "tps": 2800,
+    "ts": "2024-01-15T10:43:00Z"
+  },
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "protobuf",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 89,
+    "pub_ms": 0.38,
+    "recv_ms": 0.15,
+    "tps": 2600,
+    "ts": "2024-01-15T10:43:01Z"
+  },
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "protobuf",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 89,
+    "pub_ms": 0.32,
+    "recv_ms": 0.10,
+    "tps": 3000,
+    "ts": "2024-01-15T10:43:02Z"
+  },
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "protobuf",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 89,
+    "pub_ms": 0.41,
+    "recv_ms": 0.18,
+    "tps": 2400,
+    "ts": "2024-01-15T10:43:03Z"
+  },
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "protobuf",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 89,
+    "pub_ms": 0.36,
+    "recv_ms": 0.14,
+    "tps": 2700,
+    "ts": "2024-01-15T10:43:04Z"
+  }
+]

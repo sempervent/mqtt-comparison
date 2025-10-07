@@ -1,0 +1,11 @@
+# R MQTT Implementation Dependencies
+# Install these packages in R:
+
+# Install required packages
+install.packages(c("mqtt", "jsonlite", "msgpack", "argparse", "cbor", "RProtoBuf"))
+
+# Or install from CRAN:
+# install.packages("mqtt")
+# install.packages("jsonlite") 
+# install.packages("msgpack")
+# install.packages("argparse")

@@ -1,0 +1,121 @@
+# Docker Makefile for MQTT Comparison
+
+.PHONY: help build test clean benchmark
+
+# Default target
+help:
+	@echo "MQTT Comparison Docker Commands"
+	@echo ""
+	@echo "Available targets:"
+	@echo "  build-all     - Build all Docker images"
+	@echo "  build-<lang>  - Build specific language image"
+	@echo "  test-<lang>   - Test specific language"
+	@echo "  test-all      - Test all languages"
+	@echo "  benchmark     - Run comprehensive benchmark"
+	@echo "  broker        - Start MQTT broker only"
+	@echo "  clean         - Clean up all containers and images"
+	@echo ""
+	@echo "Usage examples:"
+	@echo "  make build-all                    # Build all images"
+	@echo "  make test-python                  # Test Python implementation"
+	@echo "  make test-all                     # Test all languages"
+	@echo "  make benchmark                    # Run full benchmark suite"
+
+# Build all images
+build-all:
+	@echo "Building all Docker images..."
+	docker compose build
+
+# Build specific language
+build-python:
+	docker compose build python-publisher python-subscriber
+
+build-java:
+	docker compose build java-publisher java-subscriber
+
+build-rust:
+	docker compose build rust-publisher rust-subscriber
+
+build-c:
+	docker compose build c-publisher c-subscriber
+
+build-cpp:
+	docker compose build cpp-publisher cpp-subscriber
+
+build-julia:
+	docker compose build julia-publisher julia-subscriber
+
+build-r:
+	docker compose build r-publisher r-subscriber
+
+build-csharp:
+	docker compose build csharp-publisher csharp-subscriber
+
+build-benchmark:
+	docker compose build benchmark
+
+# Start MQTT broker
+broker:
+	@echo "Starting MQTT broker..."
+	docker compose --profile broker up -d
+	@echo "MQTT broker is running at localhost:1883"
+
+# Test specific language
+test-python:
+	@echo "Testing Python implementation..."
+	./scripts/run-language-test.sh python json small 1 10
+
+test-java:
+	@echo "Testing Java implementation..."
+	./scripts/run-language-test.sh java json small 1 10
+
+test-rust:
+	@echo "Testing Rust implementation..."
+	./scripts/run-language-test.sh rust json small 1 10
+
+test-c:
+	@echo "Testing C implementation..."
+	./scripts/run-language-test.sh c json small 1 10
+
+test-cpp:
+	@echo "Testing C++ implementation..."
+	./scripts/run-language-test.sh cpp json small 1 10
+
+test-julia:
+	@echo "Testing Julia implementation..."
+	./scripts/run-language-test.sh julia json small 1 10
+
+test-r:
+	@echo "Testing R implementation..."
+	./scripts/run-language-test.sh r json small 1 10
+
+test-csharp:
+	@echo "Testing C# implementation..."
+	./scripts/run-language-test.sh csharp json small 1 10
+
+# Test all languages
+test-all:
+	@echo "Testing all languages..."
+	./scripts/run-all-tests.sh
+
+# Run benchmark
+benchmark:
+	@echo "Running comprehensive benchmark..."
+	./scripts/run-benchmark.sh
+
+# Clean up
+clean:
+	@echo "Cleaning up Docker resources..."
+	docker compose down --volumes --remove-orphans
+	docker system prune -f
+	@echo "Cleanup completed"
+
+# Quick test (single language)
+quick-test:
+	@echo "Running quick test with Python..."
+	./scripts/run-language-test.sh python json small 1 5
+
+# Performance test
+perf-test:
+	@echo "Running performance test..."
+	./scripts/run-language-test.sh python json large 2 100

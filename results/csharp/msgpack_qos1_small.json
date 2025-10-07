@@ -1,0 +1,62 @@
+[
+  {
+    "lang": "csharp",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 1.5,
+    "recv_ms": 0.7,
+    "tps": 650,
+    "ts": "2024-01-15T10:53:00Z"
+  },
+  {
+    "lang": "csharp",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 1.7,
+    "recv_ms": 0.8,
+    "tps": 580,
+    "ts": "2024-01-15T10:53:01Z"
+  },
+  {
+    "lang": "csharp",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 1.3,
+    "recv_ms": 0.6,
+    "tps": 750,
+    "ts": "2024-01-15T10:53:02Z"
+  },
+  {
+    "lang": "csharp",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 1.6,
+    "recv_ms": 0.7,
+    "tps": 620,
+    "ts": "2024-01-15T10:53:03Z"
+  },
+  {
+    "lang": "csharp",
+    "role": "pub",
+    "enc": "msgpack",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 95,
+    "pub_ms": 1.8,
+    "recv_ms": 0.9,
+    "tps": 550,
+    "ts": "2024-01-15T10:53:04Z"
+  }
+]

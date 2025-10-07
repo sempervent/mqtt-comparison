@@ -1,0 +1,62 @@
+[
+  {
+    "lang": "java",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 2.1,
+    "recv_ms": 1.2,
+    "tps": 500,
+    "ts": "2024-01-15T10:37:00Z"
+  },
+  {
+    "lang": "java",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 1.8,
+    "recv_ms": 1.0,
+    "tps": 600,
+    "ts": "2024-01-15T10:37:01Z"
+  },
+  {
+    "lang": "java",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 2.3,
+    "recv_ms": 1.3,
+    "tps": 450,
+    "ts": "2024-01-15T10:37:02Z"
+  },
+  {
+    "lang": "java",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 1.9,
+    "recv_ms": 1.1,
+    "tps": 550,
+    "ts": "2024-01-15T10:37:03Z"
+  },
+  {
+    "lang": "java",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 2.0,
+    "recv_ms": 1.2,
+    "tps": 500,
+    "ts": "2024-01-15T10:37:04Z"
+  }
+]

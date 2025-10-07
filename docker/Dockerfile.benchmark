@@ -1,0 +1,29 @@
+# Benchmark Harness Dockerfile
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy benchmark harness
+COPY benchmarks/ ./benchmarks/
+COPY tools/ ./tools/
+COPY schemas/ ./schemas/
+COPY results/ ./results/
+
+# Install Python dependencies
+RUN pip install --no-cache-dir \
+    paho-mqtt \
+    orjson \
+    msgpack \
+    cbor2 \
+    protobuf
+
+# Create results directories
+RUN mkdir -p results/{python,rust,c,cpp,julia,r,csharp,java}
+
+# Set default command
+CMD ["python", "benchmarks/benchmark.py"]

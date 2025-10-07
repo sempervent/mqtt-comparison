@@ -1,0 +1,108 @@
+site_name: MQTT Multi-Language Benchmarks
+site_description: Comprehensive performance analysis across 8 programming languages and 4 encoding formats for MQTT messaging
+site_author: MQTT Comparison Team
+site_url: https://mqtt-comparison.github.io
+repo_url: https://github.com/mqtt-comparison/mqtt-comparison
+theme:
+  name: material
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - navigation.expand
+    - navigation.path
+    - navigation.indexes
+    - toc.integrate
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - meta
+    - navigation.footer
+plugins:
+  - search
+  - git-revision-date-localized:
+      fallback_to_build_date: true
+  - minify
+  - mermaid2
+  - macros
+  - exclude:
+      glob:
+        - _prompts/**
+        - _summaries/**
+markdown_extensions:
+  - admonition
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.emoji
+  - pymdownx.tasklist
+extra:
+  version:
+    provider: mike
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/mqtt-comparison
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/r/mqtt-comparison
+    - icon: fontawesome/solid/chart-line
+      link: https://mqtt-comparison.github.io/reports/
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and understand how
+      our visitors use it.
+  generator: false
+nav:
+  - Home: overview.md
+  - 📊 Benchmark Reports:
+    - Executive Summary: reports/index.md
+    - Language Performance:
+      - C: reports/c/index.md
+      - C++: reports/cpp/index.md
+      - C#: reports/csharp/index.md
+      - Java: reports/java/index.md
+      - Julia: reports/julia/index.md
+      - Python: reports/python/index.md
+      - R: reports/r/index.md
+      - Rust: reports/rust/index.md
+  - 📚 Documentation:
+    - Implementation Matrix: IMPLEMENTATION_MATRIX.md
+    - Architecture: ARCHITECTURE.md
+    - Development Guide: DEVELOPMENT.md
+    - Quick Reference: QUICK_REFERENCE.md
+    - Build & Preview: howto-build-docs.md
+  - 🔧 Technical Details:
+    - Benchmarks: BENCHMARKS.md

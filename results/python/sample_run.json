@@ -1,0 +1,12 @@
+{
+  "lang": "python",
+  "role": "pub",
+  "enc": "json",
+  "variant": "small",
+  "qos": 1,
+  "bytes": 128,
+  "pub_ms": 2.5,
+  "recv_ms": 1.2,
+  "tps": 400.0,
+  "ts": "2024-01-15T10:30:00Z"
+}

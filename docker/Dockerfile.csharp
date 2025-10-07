@@ -1,0 +1,29 @@
+# C# MQTT Implementation Dockerfile
+FROM mcr.microsoft.com/dotnet/sdk:7.0 as builder
+
+WORKDIR /app
+
+# Copy C# project files
+COPY csharp/MQTTComparison.csproj .
+COPY csharp/src/ ./src/
+COPY schemas/ ./schemas/
+
+# Build the project
+RUN dotnet build -c Release
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/runtime:7.0
+
+WORKDIR /app
+
+# Copy built binaries
+COPY --from=builder /app/bin/Release/net7.0/ ./
+
+# Copy schemas
+COPY schemas/ ./schemas/
+
+# Create results directory
+RUN mkdir -p results
+
+# Set default command
+CMD ["dotnet", "MQTTComparison.dll", "publisher"]

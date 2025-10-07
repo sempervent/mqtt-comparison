@@ -1,0 +1,62 @@
+[
+  {
+    "lang": "csharp",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 1.8,
+    "recv_ms": 0.9,
+    "tps": 550,
+    "ts": "2024-01-15T10:52:00Z"
+  },
+  {
+    "lang": "csharp",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 2.1,
+    "recv_ms": 1.1,
+    "tps": 470,
+    "ts": "2024-01-15T10:52:01Z"
+  },
+  {
+    "lang": "csharp",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 1.6,
+    "recv_ms": 0.8,
+    "tps": 620,
+    "ts": "2024-01-15T10:52:02Z"
+  },
+  {
+    "lang": "csharp",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 1.9,
+    "recv_ms": 1.0,
+    "tps": 520,
+    "ts": "2024-01-15T10:52:03Z"
+  },
+  {
+    "lang": "csharp",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 2.2,
+    "recv_ms": 1.2,
+    "tps": 450,
+    "ts": "2024-01-15T10:52:04Z"
+  }
+]

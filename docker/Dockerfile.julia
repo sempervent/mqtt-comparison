@@ -1,0 +1,23 @@
+# Julia MQTT Implementation Dockerfile
+FROM julia:1.9
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy Julia project files
+COPY julia/Project.toml .
+COPY julia/src/ ./src/
+COPY schemas/ ./schemas/
+
+# Install Julia dependencies
+RUN julia -e "using Pkg; Pkg.activate(\".\"); Pkg.instantiate()"
+
+# Create results directory
+RUN mkdir -p results
+
+# Set default command
+CMD ["julia", "src/publisher.jl"]

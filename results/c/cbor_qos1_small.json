@@ -1,0 +1,62 @@
+[
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "cbor",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 98,
+    "pub_ms": 0.52,
+    "recv_ms": 0.22,
+    "tps": 1900,
+    "ts": "2024-01-15T10:42:00Z"
+  },
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "cbor",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 98,
+    "pub_ms": 0.48,
+    "recv_ms": 0.20,
+    "tps": 2000,
+    "ts": "2024-01-15T10:42:01Z"
+  },
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "cbor",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 98,
+    "pub_ms": 0.55,
+    "recv_ms": 0.25,
+    "tps": 1800,
+    "ts": "2024-01-15T10:42:02Z"
+  },
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "cbor",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 98,
+    "pub_ms": 0.46,
+    "recv_ms": 0.18,
+    "tps": 2100,
+    "ts": "2024-01-15T10:42:03Z"
+  },
+  {
+    "lang": "c",
+    "role": "pub",
+    "enc": "cbor",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 98,
+    "pub_ms": 0.51,
+    "recv_ms": 0.23,
+    "tps": 1950,
+    "ts": "2024-01-15T10:42:04Z"
+  }
+]

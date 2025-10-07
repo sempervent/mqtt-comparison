@@ -1,0 +1,11 @@
+# C MQTT Implementation Dependencies
+# Install these packages on your system:
+
+# Ubuntu/Debian:
+# sudo apt-get install libpaho-mqtt-dev libjson-c-dev libmsgpack-dev
+
+# macOS:
+# brew install paho-mqtt-c json-c msgpack-c
+
+# CentOS/RHEL:
+# sudo yum install paho-mqtt-c-devel json-c-devel msgpack-devel

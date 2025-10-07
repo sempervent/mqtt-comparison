@@ -1,0 +1,12 @@
+{
+  "lang": "rust",
+  "role": "pub",
+  "enc": "msgpack",
+  "variant": "medium",
+  "qos": 2,
+  "bytes": 2048,
+  "pub_ms": 1.8,
+  "recv_ms": 0.9,
+  "tps": 555.0,
+  "ts": "2024-01-15T10:31:00Z"
+}

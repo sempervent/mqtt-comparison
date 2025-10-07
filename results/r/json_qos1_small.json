@@ -1,0 +1,62 @@
+[
+  {
+    "lang": "r",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 3.2,
+    "recv_ms": 1.8,
+    "tps": 300,
+    "ts": "2024-01-15T10:50:00Z"
+  },
+  {
+    "lang": "r",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 3.5,
+    "recv_ms": 2.0,
+    "tps": 280,
+    "ts": "2024-01-15T10:50:01Z"
+  },
+  {
+    "lang": "r",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 2.9,
+    "recv_ms": 1.6,
+    "tps": 340,
+    "ts": "2024-01-15T10:50:02Z"
+  },
+  {
+    "lang": "r",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 3.3,
+    "recv_ms": 1.9,
+    "tps": 300,
+    "ts": "2024-01-15T10:50:03Z"
+  },
+  {
+    "lang": "r",
+    "role": "pub",
+    "enc": "json",
+    "variant": "small",
+    "qos": 1,
+    "bytes": 128,
+    "pub_ms": 3.8,
+    "recv_ms": 2.2,
+    "tps": 260,
+    "ts": "2024-01-15T10:50:04Z"
+  }
+]
