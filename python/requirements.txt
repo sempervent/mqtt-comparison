@@ -1,2 +1,4 @@
 paho-mqtt>=2.0.0
 msgpack>=1.0.0
+cbor2>=5.4.0
+protobuf>=4.21.0

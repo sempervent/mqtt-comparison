@@ -9,7 +9,7 @@ A comprehensive comparison of MQTT publish/subscribe implementations across mult
 
 This project compares MQTT pub/sub performance across:
 
-**Languages**: Python, Rust, C, C++, Julia, R, C#
+**Languages**: Python, Java, Rust, C, C++, Julia, R, C#
 
 **Encodings**: JSON, MessagePack, CBOR, Protocol Buffers
 
@@ -19,17 +19,38 @@ This project compares MQTT pub/sub performance across:
 
 ### Prerequisites
 
-- Docker and Docker Compose
-- Python 3.11+
-- Language-specific toolchains (as needed)
+- Docker 20.10+ and Docker Compose 2.0+
+- Python 3.11+ (for local development)
+- Language-specific toolchains (for local development)
 
-### Running the MQTT Broker
+### Docker Setup (Recommended)
 
 ```bash
-docker compose up -d
+# Start MQTT broker
+docker compose --profile broker up -d
+
+# Test a specific language
+./scripts/run-language-test.sh python json small 1 10
+
+# Run all tests
+./scripts/run-all-tests.sh
+
+# Run comprehensive benchmark
+./scripts/run-benchmark.sh
 ```
 
-The Mosquitto broker will be available at `localhost:1883`.
+### Local Development
+
+```bash
+# Start MQTT broker
+docker compose up -d
+
+# Run Python tests locally
+python3 python/src/publisher.py --encoding json --payload small --qos 1
+
+# Run benchmark locally
+python3 benchmarks/benchmark.py --languages python --encodings json
+```
 
 ### Smoke Test
 
@@ -100,14 +121,59 @@ All implementations use a common sensor data schema:
 
 ## Testing
 
-Run the CI checks locally:
+### Docker Testing (Recommended)
 
 ```bash
+# Test specific language
+./scripts/run-language-test.sh python json small 1 10
+./scripts/run-language-test.sh java msgpack medium 2 50
+./scripts/run-language-test.sh rust cbor large 1 100
+
+# Test all languages
+./scripts/run-all-tests.sh
+
+# Run comprehensive benchmark
+./scripts/run-benchmark.sh
+```
+
+### Local Testing
+
+```bash
+# Run CI checks locally
 ./smoke.sh
 docker compose up -d
 # Run language-specific tests
 docker compose down
 ```
+
+## Docker Setup
+
+The project includes comprehensive Docker support for all languages and the benchmark harness.
+
+### Quick Docker Commands
+
+```bash
+# Start MQTT broker
+docker compose --profile broker up -d
+
+# Test specific language
+docker compose --profile python up -d
+
+# Run benchmark
+docker compose run --rm benchmark --languages python --encodings json
+
+# Clean up
+docker compose down --volumes
+```
+
+### Docker Profiles
+
+- `broker` - MQTT broker only
+- `python`, `java`, `rust`, `c`, `cpp`, `julia`, `r`, `csharp` - Language implementations
+- `benchmark` - Benchmark harness
+- `all` - All services
+
+For detailed Docker documentation, see [DOCKER.md](DOCKER.md).
 
 ## Contributing
 

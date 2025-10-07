@@ -1,12 +1,351 @@
+# Docker Compose configuration for MQTT Comparison
+
 services:
+  # MQTT Broker
   mosquitto:
-    image: eclipse-mosquitto:2
+    image: eclipse-mosquitto:2.0
     container_name: mqtt-broker
     ports:
       - "1883:1883"
       - "9001:9001"
     volumes:
-      - ./mosquitto/config:/mosquitto/config
-      - ./mosquitto/data:/mosquitto/data
-      - ./mosquitto/log:/mosquitto/log
-    restart: unless-stopped
+      - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_logs:/mosquitto/log
+    healthcheck:
+      test: ["CMD", "mosquitto_pub", "-h", "localhost", "-t", "test", "-m", "healthcheck"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    profiles:
+      - broker
+      - all
+      - test
+
+  # Python Implementation
+  python-publisher:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.python
+    container_name: python-publisher
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - python
+      - all
+      - test
+
+  python-subscriber:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.python
+    container_name: python-subscriber
+    command: ["python", "src/subscriber.py"]
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - python
+      - all
+      - test
+
+  # Java Implementation
+  java-publisher:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.java
+    container_name: java-publisher
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - java
+      - all
+      - test
+
+  java-subscriber:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.java
+    container_name: java-subscriber
+    command: ["java", "-jar", "target/mqtt-java-1.0.0.jar", "subscriber"]
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - java
+      - all
+      - test
+
+  # Rust Implementation
+  rust-publisher:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.rust
+    container_name: rust-publisher
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - rust
+      - all
+      - test
+
+  rust-subscriber:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.rust
+    container_name: rust-subscriber
+    command: ["subscriber"]
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - rust
+      - all
+      - test
+
+  # C Implementation
+  c-publisher:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.c
+    container_name: c-publisher
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - c
+      - all
+      - test
+
+  c-subscriber:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.c
+    container_name: c-subscriber
+    command: ["./bin/subscriber"]
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - c
+      - all
+      - test
+
+  # C++ Implementation
+  cpp-publisher:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.cpp
+    container_name: cpp-publisher
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - cpp
+      - all
+      - test
+
+  cpp-subscriber:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.cpp
+    container_name: cpp-subscriber
+    command: ["./bin/subscriber"]
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - cpp
+      - all
+      - test
+
+  # Julia Implementation
+  julia-publisher:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.julia
+    container_name: julia-publisher
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - julia
+      - all
+      - test
+
+  julia-subscriber:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.julia
+    container_name: julia-subscriber
+    command: ["julia", "src/subscriber.jl"]
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - julia
+      - all
+      - test
+
+  # R Implementation
+  r-publisher:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.r
+    container_name: r-publisher
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - r
+      - all
+      - test
+
+  r-subscriber:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.r
+    container_name: r-subscriber
+    command: ["Rscript", "src/subscriber.R"]
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - r
+      - all
+      - test
+
+  # C# Implementation
+  csharp-publisher:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.csharp
+    container_name: csharp-publisher
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - csharp
+      - all
+      - test
+
+  csharp-subscriber:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.csharp
+    container_name: csharp-subscriber
+    command: ["dotnet", "MQTTComparison.dll", "subscriber"]
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    volumes:
+      - ./results:/app/results
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    profiles:
+      - csharp
+      - all
+      - test
+
+  # Benchmark Harness
+  benchmark:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.benchmark
+    container_name: benchmark-harness
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    volumes:
+      - ./results:/app/results
+    profiles:
+      - benchmark
+      - all
+      - test
+
+volumes:
+  mosquitto_data:
+  mosquitto_logs:

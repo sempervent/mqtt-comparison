@@ -40,18 +40,20 @@ class BenchmarkHarness:
         self.port = port
         self.results: List[BenchmarkResult] = []
 
-    def run_python_benchmark(self, encoding: str, message_count: int) -> BenchmarkResult:
+    def run_python_benchmark(self, encoding: str, message_count: int, payload_size: str = "small", qos: int = 1) -> BenchmarkResult:
         """
         Run Python benchmark.
 
         Args:
             encoding: Encoding format ('json' or 'msgpack')
             message_count: Number of messages to send
+            payload_size: Payload size variant ('small', 'medium', 'large')
+            qos: Quality of Service level
 
         Returns:
             BenchmarkResult object
         """
-        print(f"\nRunning Python benchmark with {encoding} encoding...")
+        print(f"\nRunning Python benchmark with {encoding} encoding, {payload_size} payload, QoS {qos}...")
         
         start_time = time.time()
         
@@ -62,7 +64,9 @@ class BenchmarkHarness:
             "--port", str(self.port),
             "--encoding", encoding,
             "--count", str(message_count),
-            "--interval", "0.01"
+            "--interval", "0.01",
+            "--payload", payload_size,
+            "--qos", str(qos)
         ]
         
         result = subprocess.run(cmd, capture_output=True, text=True)
@@ -70,8 +74,14 @@ class BenchmarkHarness:
         duration = time.time() - start_time
         messages_per_second = message_count / duration if duration > 0 else 0
         
-        # Rough estimate of bytes (will be more accurate with actual measurement)
-        avg_message_size = 150 if encoding == "json" else 100
+        # Estimate bytes based on payload size
+        if payload_size == "small":
+            avg_message_size = 150 if encoding == "json" else 100
+        elif payload_size == "medium":
+            avg_message_size = 2000 if encoding == "json" else 1500
+        else:  # large
+            avg_message_size = 64000 if encoding == "json" else 50000
+        
         bytes_sent = message_count * avg_message_size
         
         return BenchmarkResult(
@@ -83,7 +93,367 @@ class BenchmarkHarness:
             bytes_sent=bytes_sent
         )
 
-    def run_benchmark(self, language: str, encoding: str, message_count: int):
+    def run_rust_benchmark(self, encoding: str, message_count: int, payload_size: str = "small", qos: int = 1) -> BenchmarkResult:
+        """
+        Run Rust benchmark.
+
+        Args:
+            encoding: Encoding format ('json' or 'msgpack')
+            message_count: Number of messages to send
+            payload_size: Payload size variant ('small', 'medium', 'large')
+            qos: Quality of Service level
+
+        Returns:
+            BenchmarkResult object
+        """
+        print(f"\nRunning Rust benchmark with {encoding} encoding, {payload_size} payload, QoS {qos}...")
+        
+        start_time = time.time()
+        
+        cmd = [
+            "cargo", "run", "--bin", "publisher", "--release", "--",
+            "--broker", self.broker,
+            "--port", str(self.port),
+            "--encoding", encoding,
+            "--count", str(message_count),
+            "--interval", "0.01",
+            "--payload", payload_size,
+            "--qos", str(qos)
+        ]
+        
+        result = subprocess.run(cmd, capture_output=True, text=True, cwd="rust")
+        
+        duration = time.time() - start_time
+        messages_per_second = message_count / duration if duration > 0 else 0
+        
+        # Estimate bytes based on payload size
+        if payload_size == "small":
+            avg_message_size = 150 if encoding == "json" else 100
+        elif payload_size == "medium":
+            avg_message_size = 2000 if encoding == "json" else 1500
+        else:  # large
+            avg_message_size = 64000 if encoding == "json" else 50000
+        
+        bytes_sent = message_count * avg_message_size
+        
+        return BenchmarkResult(
+            language="rust",
+            encoding=encoding,
+            message_count=message_count,
+            duration=duration,
+            messages_per_second=messages_per_second,
+            bytes_sent=bytes_sent
+        )
+
+    def run_c_benchmark(self, encoding: str, message_count: int, payload_size: str = "small", qos: int = 1) -> BenchmarkResult:
+        """
+        Run C benchmark.
+
+        Args:
+            encoding: Encoding format ('json' or 'msgpack')
+            message_count: Number of messages to send
+            payload_size: Payload size variant ('small', 'medium', 'large')
+            qos: Quality of Service level
+
+        Returns:
+            BenchmarkResult object
+        """
+        print(f"\nRunning C benchmark with {encoding} encoding, {payload_size} payload, QoS {qos}...")
+        
+        start_time = time.time()
+        
+        cmd = [
+            "./c/bin/publisher",
+            "--broker", self.broker,
+            "--port", str(self.port),
+            "--count", str(message_count),
+            "--interval", "0.01",
+            "--payload", payload_size,
+            "--qos", str(qos)
+        ]
+        
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        
+        duration = time.time() - start_time
+        messages_per_second = message_count / duration if duration > 0 else 0
+        
+        # Estimate bytes based on payload size
+        if payload_size == "small":
+            avg_message_size = 150 if encoding == "json" else 100
+        elif payload_size == "medium":
+            avg_message_size = 2000 if encoding == "json" else 1500
+        else:  # large
+            avg_message_size = 64000 if encoding == "json" else 50000
+        
+        bytes_sent = message_count * avg_message_size
+        
+        return BenchmarkResult(
+            language="c",
+            encoding=encoding,
+            message_count=message_count,
+            duration=duration,
+            messages_per_second=messages_per_second,
+            bytes_sent=bytes_sent
+        )
+
+    def run_cpp_benchmark(self, encoding: str, message_count: int, payload_size: str = "small", qos: int = 1) -> BenchmarkResult:
+        """
+        Run C++ benchmark.
+
+        Args:
+            encoding: Encoding format ('json' or 'msgpack')
+            message_count: Number of messages to send
+            payload_size: Payload size variant ('small', 'medium', 'large')
+            qos: Quality of Service level
+
+        Returns:
+            BenchmarkResult object
+        """
+        print(f"\nRunning C++ benchmark with {encoding} encoding, {payload_size} payload, QoS {qos}...")
+        
+        start_time = time.time()
+        
+        cmd = [
+            "./cpp/bin/publisher",
+            "--broker", self.broker,
+            "--port", str(self.port),
+            "--count", str(message_count),
+            "--interval", "0.01",
+            "--payload", payload_size,
+            "--qos", str(qos)
+        ]
+        
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        
+        duration = time.time() - start_time
+        messages_per_second = message_count / duration if duration > 0 else 0
+        
+        # Estimate bytes based on payload size
+        if payload_size == "small":
+            avg_message_size = 150 if encoding == "json" else 100
+        elif payload_size == "medium":
+            avg_message_size = 2000 if encoding == "json" else 1500
+        else:  # large
+            avg_message_size = 64000 if encoding == "json" else 50000
+        
+        bytes_sent = message_count * avg_message_size
+        
+        return BenchmarkResult(
+            language="cpp",
+            encoding=encoding,
+            message_count=message_count,
+            duration=duration,
+            messages_per_second=messages_per_second,
+            bytes_sent=bytes_sent
+        )
+
+    def run_julia_benchmark(self, encoding: str, message_count: int, payload_size: str = "small", qos: int = 1) -> BenchmarkResult:
+        """
+        Run Julia benchmark.
+
+        Args:
+            encoding: Encoding format ('json' or 'msgpack')
+            message_count: Number of messages to send
+            payload_size: Payload size variant ('small', 'medium', 'large')
+            qos: Quality of Service level
+
+        Returns:
+            BenchmarkResult object
+        """
+        print(f"\nRunning Julia benchmark with {encoding} encoding, {payload_size} payload, QoS {qos}...")
+        
+        start_time = time.time()
+        
+        cmd = [
+            "julia", "--project=.", "src/publisher.jl",
+            "--broker", self.broker,
+            "--port", str(self.port),
+            "--count", str(message_count),
+            "--interval", "0.01",
+            "--payload", payload_size,
+            "--qos", str(qos)
+        ]
+        
+        result = subprocess.run(cmd, capture_output=True, text=True, cwd="julia")
+        
+        duration = time.time() - start_time
+        messages_per_second = message_count / duration if duration > 0 else 0
+        
+        # Estimate bytes based on payload size
+        if payload_size == "small":
+            avg_message_size = 150 if encoding == "json" else 100
+        elif payload_size == "medium":
+            avg_message_size = 2000 if encoding == "json" else 1500
+        else:  # large
+            avg_message_size = 64000 if encoding == "json" else 50000
+        
+        bytes_sent = message_count * avg_message_size
+        
+        return BenchmarkResult(
+            language="julia",
+            encoding=encoding,
+            message_count=message_count,
+            duration=duration,
+            messages_per_second=messages_per_second,
+            bytes_sent=bytes_sent
+        )
+
+    def run_r_benchmark(self, encoding: str, message_count: int, payload_size: str = "small", qos: int = 1) -> BenchmarkResult:
+        """
+        Run R benchmark.
+
+        Args:
+            encoding: Encoding format ('json' or 'msgpack')
+            message_count: Number of messages to send
+            payload_size: Payload size variant ('small', 'medium', 'large')
+            qos: Quality of Service level
+
+        Returns:
+            BenchmarkResult object
+        """
+        print(f"\nRunning R benchmark with {encoding} encoding, {payload_size} payload, QoS {qos}...")
+        
+        start_time = time.time()
+        
+        cmd = [
+            "Rscript", "publisher.R",
+            "--broker", self.broker,
+            "--port", str(self.port),
+            "--count", str(message_count),
+            "--interval", "0.01",
+            "--payload", payload_size,
+            "--qos", str(qos)
+        ]
+        
+        result = subprocess.run(cmd, capture_output=True, text=True, cwd="r")
+        
+        duration = time.time() - start_time
+        messages_per_second = message_count / duration if duration > 0 else 0
+        
+        # Estimate bytes based on payload size
+        if payload_size == "small":
+            avg_message_size = 150 if encoding == "json" else 100
+        elif payload_size == "medium":
+            avg_message_size = 2000 if encoding == "json" else 1500
+        else:  # large
+            avg_message_size = 64000 if encoding == "json" else 50000
+        
+        bytes_sent = message_count * avg_message_size
+        
+        return BenchmarkResult(
+            language="r",
+            encoding=encoding,
+            message_count=message_count,
+            duration=duration,
+            messages_per_second=messages_per_second,
+            bytes_sent=bytes_sent
+        )
+
+    def run_csharp_benchmark(self, encoding: str, message_count: int, payload_size: str = "small", qos: int = 1) -> BenchmarkResult:
+        """
+        Run C# benchmark.
+
+        Args:
+            encoding: Encoding format ('json' or 'msgpack')
+            message_count: Number of messages to send
+            payload_size: Payload size variant ('small', 'medium', 'large')
+            qos: Quality of Service level
+
+        Returns:
+            BenchmarkResult object
+        """
+        print(f"\nRunning C# benchmark with {encoding} encoding, {payload_size} payload, QoS {qos}...")
+        
+        start_time = time.time()
+        
+        cmd = [
+            "dotnet", "run", "--project", "MQTTComparison.csproj", "--",
+            "--publisher",
+            "--broker", self.broker,
+            "--port", str(self.port),
+            "--count", str(message_count),
+            "--interval", "0.01",
+            "--payload", payload_size,
+            "--qos", str(qos)
+        ]
+        
+        result = subprocess.run(cmd, capture_output=True, text=True, cwd="csharp")
+        
+        duration = time.time() - start_time
+        messages_per_second = message_count / duration if duration > 0 else 0
+        
+        # Estimate bytes based on payload size
+        if payload_size == "small":
+            avg_message_size = 150 if encoding == "json" else 100
+        elif payload_size == "medium":
+            avg_message_size = 2000 if encoding == "json" else 1500
+        else:  # large
+            avg_message_size = 64000 if encoding == "json" else 50000
+        
+        bytes_sent = message_count * avg_message_size
+        
+        return BenchmarkResult(
+            language="csharp",
+            encoding=encoding,
+            message_count=message_count,
+            duration=duration,
+            messages_per_second=messages_per_second,
+            bytes_sent=bytes_sent
+        )
+
+    def run_java_benchmark(self, encoding: str, message_count: int, payload_size: str = "small", qos: int = 1) -> BenchmarkResult:
+        """
+        Run Java benchmark.
+
+        Args:
+            encoding: Encoding format ('json', 'msgpack', 'cbor', 'protobuf')
+            message_count: Number of messages to send
+            payload_size: Payload size variant ('small', 'medium', 'large')
+            qos: Quality of Service level
+
+        Returns:
+            BenchmarkResult object
+        """
+        print(f"\nRunning Java benchmark with {encoding} encoding, {payload_size} payload, QoS {qos}...")
+        
+        start_time = time.time()
+        
+        cmd = [
+            "java", "-jar", "target/mqtt-java-1.0.0.jar", "publisher",
+            "--broker", self.broker,
+            "--port", str(self.port),
+            "--count", str(message_count),
+            "--interval", "0.01",
+            "--payload", payload_size,
+            "--qos", str(qos),
+            "--encoding", encoding
+        ]
+        
+        result = subprocess.run(cmd, capture_output=True, text=True, cwd="java")
+        
+        duration = time.time() - start_time
+        messages_per_second = message_count / duration if duration > 0 else 0
+        
+        # Estimate bytes based on payload size
+        if payload_size == "small":
+            avg_message_size = 150 if encoding == "json" else 100
+        elif payload_size == "medium":
+            avg_message_size = 2000 if encoding == "json" else 1500
+        else:  # large
+            avg_message_size = 64000 if encoding == "json" else 50000
+        
+        bytes_sent = message_count * avg_message_size
+        
+        return BenchmarkResult(
+            language="java",
+            encoding=encoding,
+            message_count=message_count,
+            duration=duration,
+            messages_per_second=messages_per_second,
+            bytes_sent=bytes_sent
+        )
+
+    def run_benchmark(self, language: str, encoding: str, message_count: int, payload_size: str = "small", qos: int = 1):
         """
         Run benchmark for specified language and encoding.
 
@@ -91,9 +461,39 @@ class BenchmarkHarness:
             language: Programming language
             encoding: Encoding format
             message_count: Number of messages
+            payload_size: Payload size variant
+            qos: Quality of Service level
         """
         if language == "python":
-            result = self.run_python_benchmark(encoding, message_count)
+            result = self.run_python_benchmark(encoding, message_count, payload_size, qos)
+            self.results.append(result)
+            self.print_result(result)
+        elif language == "rust":
+            result = self.run_rust_benchmark(encoding, message_count, payload_size, qos)
+            self.results.append(result)
+            self.print_result(result)
+        elif language == "c":
+            result = self.run_c_benchmark(encoding, message_count, payload_size, qos)
+            self.results.append(result)
+            self.print_result(result)
+        elif language == "cpp":
+            result = self.run_cpp_benchmark(encoding, message_count, payload_size, qos)
+            self.results.append(result)
+            self.print_result(result)
+        elif language == "julia":
+            result = self.run_julia_benchmark(encoding, message_count, payload_size, qos)
+            self.results.append(result)
+            self.print_result(result)
+        elif language == "r":
+            result = self.run_r_benchmark(encoding, message_count, payload_size, qos)
+            self.results.append(result)
+            self.print_result(result)
+        elif language == "csharp":
+            result = self.run_csharp_benchmark(encoding, message_count, payload_size, qos)
+            self.results.append(result)
+            self.print_result(result)
+        elif language == "java":
+            result = self.run_java_benchmark(encoding, message_count, payload_size, qos)
             self.results.append(result)
             self.print_result(result)
         else:
@@ -139,13 +539,19 @@ def main():
     parser = argparse.ArgumentParser(description="MQTT Benchmark Harness")
     parser.add_argument("--broker", default="localhost", help="MQTT broker hostname")
     parser.add_argument("--port", type=int, default=1883, help="MQTT broker port")
-    parser.add_argument("--languages", nargs="+", default=["python"],
-                        help="Languages to benchmark")
-    parser.add_argument("--encodings", nargs="+", default=["json", "msgpack"],
+    parser.add_argument("--languages", nargs="+", 
+                       choices=["python", "rust", "c", "cpp", "julia", "r", "csharp", "java"],
+                       default=["python"],
+                       help="Languages to benchmark")
+    parser.add_argument("--encodings", nargs="+", default=["json", "msgpack", "cbor", "protobuf"],
                         help="Encodings to benchmark")
+    parser.add_argument("--payloads", nargs="+", default=["small"],
+                        help="Payload sizes to benchmark")
+    parser.add_argument("--qos", nargs="+", type=int, default=[1],
+                        help="QoS levels to benchmark")
     parser.add_argument("--count", type=int, default=100,
                         help="Number of messages per benchmark")
-    parser.add_argument("--output", default="benchmark_results.json",
+    parser.add_argument("--output", default="results/python/benchmark_results.json",
                         help="Output file for results")
 
     args = parser.parse_args()
@@ -156,6 +562,8 @@ def main():
     print(f"Broker: {args.broker}:{args.port}")
     print(f"Languages: {', '.join(args.languages)}")
     print(f"Encodings: {', '.join(args.encodings)}")
+    print(f"Payloads: {', '.join(args.payloads)}")
+    print(f"QoS: {', '.join(map(str, args.qos))}")
     print(f"Message count: {args.count}")
 
     harness = BenchmarkHarness(args.broker, args.port)
@@ -163,7 +571,9 @@ def main():
     try:
         for language in args.languages:
             for encoding in args.encodings:
-                harness.run_benchmark(language, encoding, args.count)
+                for payload in args.payloads:
+                    for qos in args.qos:
+                        harness.run_benchmark(language, encoding, args.count, payload, qos)
 
         harness.print_summary()
         harness.save_results(args.output)
