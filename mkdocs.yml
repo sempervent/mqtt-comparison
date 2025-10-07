@@ -1,8 +1,9 @@
 site_name: MQTT Multi-Language Benchmarks
 site_description: Comprehensive performance analysis across 8 programming languages and 4 encoding formats for MQTT messaging
 site_author: MQTT Comparison Team
-site_url: https://mqtt-comparison.github.io
+site_url: https://sempervent.github.io/mqtt-comparison
 repo_url: https://github.com/mqtt-comparison/mqtt-comparison
+use_directory_urls: true
 theme:
   name: material
   palette:
