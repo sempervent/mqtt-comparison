@@ -9,6 +9,16 @@ A comprehensive benchmark suite comparing MQTT message publishing and consumptio
 - **Real-world Insights**: Provide actionable recommendations for MQTT implementations
 - **Open Source**: Reproducible benchmarks with Docker containerization
 
+## 🌐 Live Performance Dashboard
+
+**[🚀 View Live Reports](https://sempervent.github.io/mqtt-comparison/)**
+
+Our live dashboard provides real-time performance data with interactive visualizations, allowing you to:
+- **📊 Compare Languages**: Side-by-side performance comparisons
+- **📈 Analyze Trends**: Historical performance data
+- **🔍 Filter Results**: By language, encoding, QoS level, and payload size
+- **📱 Mobile Access**: Optimized for all devices
+
 ## 📊 Current Implementation Status
 
 ### ✅ Complete Implementations

@@ -98,6 +98,8 @@ nav:
       - Python: reports/python/index.md
       - R: reports/r/index.md
       - Rust: reports/rust/index.md
+  - 🌐 Live Reports:
+    - Online Dashboard: https://sempervent.github.io/mqtt-comparison/
   - 📚 Documentation:
     - Implementation Matrix: IMPLEMENTATION_MATRIX.md
     - Architecture: ARCHITECTURE.md

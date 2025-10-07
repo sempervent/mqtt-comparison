@@ -77,6 +77,19 @@ Click on any language below to view comprehensive performance analysis:
 - [**R**](r/index.md) - Statistical analysis specialized
 - [**Rust**](rust/index.md) - Memory-safe systems programming
 
+## 🌐 Live Dashboard
+
+For the most up-to-date interactive reports and real-time performance data, visit our live dashboard:
+
+**[🚀 Online Performance Dashboard](https://sempervent.github.io/mqtt-comparison/)**
+
+The live dashboard provides:
+- **📊 Interactive Charts**: Real-time performance visualizations
+- **🔄 Auto-Updates**: Latest benchmark results automatically
+- **📱 Mobile Optimized**: Responsive design for all devices
+- **🔍 Advanced Filtering**: Filter by language, encoding, QoS level
+- **📈 Historical Data**: Performance trends over time
+
 ---
 
 *Reports are auto-generated from benchmark results. Data represents average performance across multiple test runs with small payloads (128 bytes) at QoS level 1.*
