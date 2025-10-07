@@ -205,3 +205,34 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# MQTT Comparison specific
+mosquitto/data/
+mosquitto/log/
+benchmark_results.json
+*.db
+
+# Rust
+rust/target/
+rust/Cargo.lock
+
+# C/C++
+*.o
+*.out
+*.exe
+c/build/
+cpp/build/
+
+# Julia
+julia/Manifest.toml
+
+# R
+.Rhistory
+.RData
+.Rproj.user
+
+# C#
+csharp/bin/
+csharp/obj/
+*.dll
+*.pdb
