@@ -1,5 +1,8 @@
 # MQTT Comparison
 
+[![CI Checks](https://github.com/sempervent/mqtt-comparison/actions/workflows/ci.yml/badge.svg)](https://github.com/sempervent/mqtt-comparison/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A comprehensive comparison of MQTT publish/subscribe implementations across multiple programming languages and serialization formats.
 
 ## Overview
