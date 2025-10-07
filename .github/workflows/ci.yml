@@ -1,0 +1,66 @@
+name: CI Checks
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  smoke-test:
+    name: Smoke Test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Run smoke test
+      run: ./smoke.sh
+    
+    - name: Verify project structure
+      run: |
+        test -f docker-compose.yml
+        test -d schemas
+        test -f schemas/sensor_data.json
+        test -f schemas/sensor_data.proto
+        test -d docs/_summaries
+        test -f summarize_phase.py
+
+  docker-compose-test:
+    name: Docker Compose Test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Start MQTT broker
+      run: docker-compose up -d
+    
+    - name: Wait for broker
+      run: sleep 5
+    
+    - name: Check broker is running
+      run: docker-compose ps
+    
+    - name: Check broker logs
+      run: docker-compose logs mosquitto
+    
+    - name: Stop broker
+      run: docker-compose down
+
+  python-checks:
+    name: Python Checks
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Test summarize_phase.py
+      run: |
+        python3 summarize_phase.py test "Test summary"
+        test -f docs/_summaries/*_test.md
