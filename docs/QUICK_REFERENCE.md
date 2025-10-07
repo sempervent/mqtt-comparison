@@ -6,16 +6,16 @@
 
 ```bash
 # Start
-docker-compose up -d
+docker compose up -d
 
 # Stop
-docker-compose down
+docker compose down
 
 # Restart
-docker-compose restart mosquitto
+docker compose restart mosquitto
 
 # View logs
-docker-compose logs -f mosquitto
+docker compose logs -f mosquitto
 ```
 
 ### Python Publisher/Subscriber
@@ -127,15 +127,15 @@ sub.loop()  # Blocks until interrupted
 
 ### Broker won't start
 ```bash
-docker-compose down
-docker-compose up -d
-docker-compose logs mosquitto
+docker compose down
+docker compose up -d
+docker compose logs mosquitto
 ```
 
 ### Connection refused
 ```bash
 # Check broker is running
-docker-compose ps
+docker compose ps
 
 # Check port is available
 netstat -ln | grep 1883
@@ -150,8 +150,8 @@ pip install -r requirements.txt
 ### Clean slate
 ```bash
 make clean
-docker-compose down -v
-docker-compose up -d
+docker compose down -v
+docker compose up -d
 ```
 
 ## Environment Variables

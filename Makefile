@@ -24,17 +24,17 @@ help:
 	@echo ""
 
 start:
-	docker-compose up -d
+	docker compose up -d
 	@echo "✓ MQTT broker started on localhost:1883"
 
 stop:
-	docker-compose down
+	docker compose down
 	@echo "✓ MQTT broker stopped"
 
 restart: stop start
 
 logs:
-	docker-compose logs -f mosquitto
+	docker compose logs -f mosquitto
 
 clean:
 	rm -rf mosquitto/data/*

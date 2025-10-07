@@ -30,7 +30,7 @@ fi
 # Check Docker Compose
 echo ""
 echo "✓ Checking Docker Compose..."
-if command -v docker-compose &> /dev/null || docker compose version &> /dev/null 2>&1; then
+if command -v docker compose &> /dev/null || docker compose version &> /dev/null 2>&1; then
     echo "  - Docker Compose is available"
 else
     echo "  ⚠ Docker Compose is not available"
@@ -50,7 +50,7 @@ echo ""
 echo "=== Smoke Test Complete ==="
 echo ""
 echo "To start the MQTT broker:"
-echo "  docker-compose up -d"
+echo "  docker compose up -d"
 echo ""
 echo "To stop the MQTT broker:"
-echo "  docker-compose down"
+echo "  docker compose down"

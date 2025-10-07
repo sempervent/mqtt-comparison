@@ -23,7 +23,7 @@ This project compares MQTT pub/sub performance across:
 ### Running the MQTT Broker
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 The Mosquitto broker will be available at `localhost:1883`.
@@ -101,9 +101,9 @@ Run the CI checks locally:
 
 ```bash
 ./smoke.sh
-docker-compose up -d
+docker compose up -d
 # Run language-specific tests
-docker-compose down
+docker compose down
 ```
 
 ## Contributing

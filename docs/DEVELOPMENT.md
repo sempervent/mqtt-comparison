@@ -23,13 +23,13 @@ cd mqtt-comparison
 
 3. Start MQTT broker:
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 4. Verify broker is running:
 ```bash
-docker-compose ps
-docker-compose logs mosquitto
+docker compose ps
+docker compose logs mosquitto
 ```
 
 ## Phase Development
@@ -149,8 +149,8 @@ Before committing:
 
 2. Test MQTT broker:
 ```bash
-docker-compose up -d
-docker-compose logs
+docker compose up -d
+docker compose logs
 ```
 
 3. Test implementation:
@@ -180,7 +180,7 @@ For thorough testing:
 
 1. Start broker:
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 2. Start subscriber:
@@ -266,17 +266,17 @@ git push
 docker info
 
 # Check logs
-docker-compose logs mosquitto
+docker compose logs mosquitto
 
 # Restart broker
-docker-compose restart mosquitto
+docker compose restart mosquitto
 ```
 
 ### Connection Refused
 
 ```bash
 # Verify broker is running
-docker-compose ps
+docker compose ps
 
 # Check port is available
 netstat -ln | grep 1883
