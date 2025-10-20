@@ -2,12 +2,11 @@
 # source: sensor_data.proto
 
 import sys
-_b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
+_b=(sys.version_info[0]<3 and (lambda x:x)) or (lambda x:x.encode('latin1'))
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -16,7 +15,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=_b('\n\x12sensor_data.proto\x12\x10mqtt_comparison\"\x8a\x01\n\nSensorData\x12\x11\n\ttimestamp\x18\x01 \x01(\x01\x12\x11\n\tsensor_id\x18\x02 \x01(\t\x12\x13\n\x0btemperature\x18\x03 \x01(\x01\x12\x0f\n\x07humidity\x18\x04 \x01(\x01\x12\x0f\n\x07pressure\x18\x05 \x01(\x01b\x06proto3')
+  serialized_pb=_b('\n\x12sensor_data.proto\x12\x10mqtt_comparison"\x8a\x01\n\nSensorData\x12\x11\n\ttimestamp\x18\x01 \x01(\x01\x12\x11\n\tsensor_id\x18\x02 \x01(\t\x12\x13\n\x0btemperature\x18\x03 \x01(\x01\x12\x0f\n\x07humidity\x18\x04 \x01(\x01\x12\x0f\n\x07pressure\x18\x05 \x01(\x01b\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 

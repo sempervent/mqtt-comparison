@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-import os, json, csv, statistics as stats, glob, datetime, pathlib
+import json
+import csv
+import glob
+import datetime
+import pathlib
 from collections import defaultdict
 
 DOCS = pathlib.Path("docs")
@@ -10,9 +14,11 @@ def rows_from_file(p):
     try:
         if p.suffix.lower()==".json":
             payload = json.loads(p.read_text())
-            if isinstance(payload, dict): yield payload
+            if isinstance(payload, dict):
+                yield payload
             elif isinstance(payload, list):
-                for row in payload: yield row
+                for row in payload:
+                    yield row
         elif p.suffix.lower()==".csv":
             with p.open() as f:
                 for row in csv.DictReader(f):
@@ -22,14 +28,18 @@ def rows_from_file(p):
             with p.open() as f:
                 for line in f:
                     line=line.strip()
-                    if not line: continue
-                    try: yield json.loads(line)
-                    except: pass
+                    if not line:
+                        continue
+                    try:
+                        yield json.loads(line)
+                    except Exception:
+                        pass
     except Exception as e:
         yield {"_error": f"Failed to parse {p}: {e}"}
 
 def normalize(r):
-    if "_error" in r: return r
+    if "_error" in r:
+        return r
     def get(k, d=None): return r.get(k, d)
     return {
         "lang": get("lang") or "unknown",
@@ -48,7 +58,8 @@ def load_all():
     records=[]
     for p in glob.glob("results/**/*", recursive=True):
         p=pathlib.Path(p)
-        if not p.is_file(): continue
+        if not p.is_file():
+            continue
         for r in rows_from_file(p):
             records.append(normalize(r))
     return [r for r in records if "_error" not in r]
@@ -65,7 +76,8 @@ def mk(parent, name):
 
 def stat_block(rows, key):
     xs=[float(r.get(key,0)) for r in rows if r.get(key) not in (None,"")]
-    if not xs: return "n=0"
+    if not xs:
+        return "n=0"
     def p(q): 
         i=int(q*(len(xs)-1))
         return f"{sorted(xs)[i]:.2f}"
@@ -92,10 +104,13 @@ def write_lang_pages(lang, rows):
     lines=["# " + lang.upper(), "",
            "| enc | variant | qos | count | bytes(avg) | pub_ms | recv_ms | tps |",
            "|---|---|---:|---:|---:|---|---|---|"]
-    from collections import Counter, defaultdict
-    key=lambda r:(r["enc"], r["variant"], r["qos"])
-    buckets=defaultdict(list)
-    for r in rows: buckets[key(r)].append(r)
+    from collections import defaultdict
+    def key(r):
+        return (r["enc"], r["variant"], r["qos"])
+    
+    buckets = defaultdict(list)
+    for r in rows:
+        buckets[key(r)].append(r)
     for (enc,variant,qos), xs in sorted(buckets.items()):
         avg_bytes = sum(x["bytes"] for x in xs)/len(xs)
         lines.append(f"| {enc} | {variant} | {qos} | {len(xs)} | {avg_bytes:.0f} | {stat_block(xs,'pub_ms')} | {stat_block(xs,'recv_ms')} | {stat_block(xs,'tps')} |")

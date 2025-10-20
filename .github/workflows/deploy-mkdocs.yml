@@ -40,6 +40,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Check version
+        run: |
+          echo "Version: $(cat VERSION)"
+          echo "Build date: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
       - name: Generate reports
         run: |
           python tools/render_reports.py

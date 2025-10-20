@@ -6,7 +6,6 @@ This script helps document the completion of each phase by creating
 a timestamped summary file in docs/_summaries/.
 """
 
-import os
 import sys
 from datetime import datetime
 from pathlib import Path

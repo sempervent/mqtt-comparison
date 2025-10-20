@@ -156,7 +156,7 @@ def main():
 
     args = parser.parse_args()
 
-    print(f"=== MQTT Subscriber (Python) ===")
+    print("=== MQTT Subscriber (Python) ===")
     print(f"Encoding: {args.encoding}")
     print(f"Topic: {args.topic}")
     print(f"QoS: {args.qos}")

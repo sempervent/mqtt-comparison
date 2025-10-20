@@ -7,7 +7,6 @@ then generates a unified report.
 """
 
 import subprocess
-import time
 import json
 from pathlib import Path
 import argparse
@@ -96,7 +95,7 @@ def run_benchmark_suite():
                 "--output", f"results/{config['language']}/benchmark_results.json"
             ]
             
-            result = subprocess.run(cmd, capture_output=True, text=True)
+            result = subprocess.run(cmd, capture_output=True, text=True, check=False)
             
             if result.returncode == 0:
                 print(f"✓ {config['language']} benchmarks completed")
@@ -104,7 +103,7 @@ def run_benchmark_suite():
                 # Load results
                 results_file = Path(f"results/{config['language']}/benchmark_results.json")
                 if results_file.exists():
-                    with open(results_file, 'r') as f:
+                    with open(results_file) as f:
                         lang_results = json.load(f)
                         results.extend(lang_results)
             else:
@@ -143,7 +142,6 @@ def main():
         print("Running quick benchmark suite...")
         # Modify configurations for quick run
         # This would reduce the number of tests
-        pass
     
     run_benchmark_suite()
 

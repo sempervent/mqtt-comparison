@@ -5,6 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   smoke-test:
@@ -13,6 +14,11 @@ jobs:
     
     steps:
     - uses: actions/checkout@v4
+    
+    - name: Check version
+      run: |
+        echo "Version: $(cat VERSION)"
+        echo "Build date: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
     
     - name: Run smoke test
       run: ./smoke.sh

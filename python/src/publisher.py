@@ -76,7 +76,7 @@ class SensorDataPublisher:
         self.client.loop_stop()
         self.client.disconnect()
 
-    def encode_message(self, data: Dict[str, Any]) -> bytes:
+    def encode_message(self, data: dict[str, Any]) -> bytes:
         """
         Encode message data based on configured encoding.
 
@@ -110,7 +110,7 @@ class SensorDataPublisher:
         else:
             raise ValueError(f"Unsupported encoding: {self.encoding}")
 
-    def create_sensor_data(self, sensor_id: str, payload_size: str = "small") -> Dict[str, Any]:
+    def create_sensor_data(self, sensor_id: str, payload_size: str = "small") -> dict[str, Any]:
         """
         Create sample sensor data with configurable payload size.
 
@@ -159,7 +159,7 @@ class SensorDataPublisher:
         
         return base_data
 
-    def publish(self, topic: str, data: Dict[str, Any]) -> float:
+    def publish(self, topic: str, data: dict[str, Any]) -> float:
         """
         Publish sensor data to MQTT topic.
 
@@ -195,7 +195,7 @@ def main():
 
     args = parser.parse_args()
 
-    print(f"=== MQTT Publisher (Python) ===")
+    print("=== MQTT Publisher (Python) ===")
     print(f"Encoding: {args.encoding}")
     print(f"Topic: {args.topic}")
     print(f"Payload: {args.payload}")

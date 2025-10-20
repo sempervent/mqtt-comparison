@@ -9,8 +9,7 @@ import argparse
 import json
 import subprocess
 import time
-from pathlib import Path
-from typing import Dict, List, Any
+from typing import List
 from dataclasses import dataclass, asdict
 
 
@@ -69,7 +68,7 @@ class BenchmarkHarness:
             "--qos", str(qos)
         ]
         
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        subprocess.run(cmd, capture_output=True, text=True)
         
         duration = time.time() - start_time
         messages_per_second = message_count / duration if duration > 0 else 0
@@ -121,7 +120,7 @@ class BenchmarkHarness:
             "--qos", str(qos)
         ]
         
-        result = subprocess.run(cmd, capture_output=True, text=True, cwd="rust")
+        subprocess.run(cmd, capture_output=True, text=True, cwd="rust", check=False)
         
         duration = time.time() - start_time
         messages_per_second = message_count / duration if duration > 0 else 0
@@ -172,7 +171,7 @@ class BenchmarkHarness:
             "--qos", str(qos)
         ]
         
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        subprocess.run(cmd, capture_output=True, text=True)
         
         duration = time.time() - start_time
         messages_per_second = message_count / duration if duration > 0 else 0
@@ -223,7 +222,7 @@ class BenchmarkHarness:
             "--qos", str(qos)
         ]
         
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        subprocess.run(cmd, capture_output=True, text=True)
         
         duration = time.time() - start_time
         messages_per_second = message_count / duration if duration > 0 else 0
@@ -274,7 +273,7 @@ class BenchmarkHarness:
             "--qos", str(qos)
         ]
         
-        result = subprocess.run(cmd, capture_output=True, text=True, cwd="julia")
+        subprocess.run(cmd, capture_output=True, text=True, cwd="julia", check=False)
         
         duration = time.time() - start_time
         messages_per_second = message_count / duration if duration > 0 else 0
@@ -325,7 +324,7 @@ class BenchmarkHarness:
             "--qos", str(qos)
         ]
         
-        result = subprocess.run(cmd, capture_output=True, text=True, cwd="r")
+        subprocess.run(cmd, capture_output=True, text=True, cwd="r", check=False)
         
         duration = time.time() - start_time
         messages_per_second = message_count / duration if duration > 0 else 0
@@ -377,7 +376,7 @@ class BenchmarkHarness:
             "--qos", str(qos)
         ]
         
-        result = subprocess.run(cmd, capture_output=True, text=True, cwd="csharp")
+        subprocess.run(cmd, capture_output=True, text=True, cwd="csharp", check=False)
         
         duration = time.time() - start_time
         messages_per_second = message_count / duration if duration > 0 else 0
@@ -429,7 +428,7 @@ class BenchmarkHarness:
             "--encoding", encoding
         ]
         
-        result = subprocess.run(cmd, capture_output=True, text=True, cwd="java")
+        subprocess.run(cmd, capture_output=True, text=True, cwd="java", check=False)
         
         duration = time.time() - start_time
         messages_per_second = message_count / duration if duration > 0 else 0
@@ -542,7 +541,7 @@ def main():
     parser.add_argument("--languages", nargs="+", 
                        choices=["python", "rust", "c", "cpp", "julia", "r", "csharp", "java"],
                        default=["python"],
-                       help="Languages to benchmark")
+                        help="Languages to benchmark")
     parser.add_argument("--encodings", nargs="+", default=["json", "msgpack", "cbor", "protobuf"],
                         help="Encodings to benchmark")
     parser.add_argument("--payloads", nargs="+", default=["small"],

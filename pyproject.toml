@@ -1,0 +1,55 @@
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "C90", "I", "N", "UP", "YTT", "S", "BLE", "FBT", "B", "A", "COM", "C4", "DTZ", "T10", "EM", "EXE", "FA", "ISC", "ICN", "G", "INP", "PIE", "T20", "PYI", "PT", "Q", "RSE", "RET", "SLF", "SLOT", "SIM", "TID", "TCH", "INT", "ARG", "PTH", "TD", "FIX", "ERA", "PD", "PGH", "PL", "TRY", "FLY", "NPY", "AIR", "PERF", "FURB", "LOG", "RUF"]
+ignore = [
+    "E402",  # Module level import not at top of file (for generated protobuf files)
+    "F401",  # Imported but unused (for generated protobuf files)
+    "T201",  # print found (CLI tools need print statements)
+    "BLE001", # Do not catch blind exception (for CLI error handling)
+    "EM101", # Exception must not use a string literal (for CLI error messages)
+    "EM102", # Exception must not use an f-string literal (for CLI error messages)
+    "TRY003", # Avoid specifying long messages outside the exception class (for CLI)
+    "ARG002", # Unused method argument (MQTT callback signatures)
+    "Q000", # Single quotes found but double quotes preferred (mixed quotes OK)
+    "COM812", # Trailing comma missing (not critical)
+    "W293", # Blank line contains whitespace (not critical)
+    "E501", # Line too long (not critical for CLI tools)
+    "I001", # Import block is un-sorted (not critical)
+    "RET505", # Unnecessary elif after return (acceptable pattern)
+    "PLR2004", # Magic value used in comparison (CLI arg count)
+    "DTZ005", # datetime.now() called without tz (CLI tools)
+    "PTH123", # open() should be replaced by Path.open() (acceptable)
+    "EXE001", # Shebang is present but file is not executable (not critical)
+    "C901", # Function is too complex (acceptable for data processing)
+    "PLW2901", # for loop variable overwritten (acceptable pattern)
+    "SIM105", # Use contextlib.suppress (acceptable pattern)
+    "S110", # try-except-pass detected (acceptable for data processing)
+    "DTZ003", # datetime.utcnow() used (acceptable for CLI)
+    "PTH207", # Replace glob with Path.glob (acceptable)
+    "PERF401", # Use list.extend (acceptable pattern)
+    "W291", # Trailing whitespace (not critical)
+    "N806", # Variable should be lowercase (acceptable for constants)
+    "PD901", # Avoid using generic variable name `df` (acceptable for data analysis)
+    "RET504", # Unnecessary assignment before return (acceptable pattern)
+    "PTH103", # os.makedirs() should be replaced by Path.mkdir (acceptable)
+    "PTH120", # os.path.dirname() should be replaced by Path.parent (acceptable)
+    "UP035", # typing.List/Dict is deprecated (acceptable for compatibility)
+    "S603", # subprocess call: check for execution of untrusted input (acceptable for CLI)
+    "S311", # Standard pseudo-random generators (acceptable for demo data)
+    "INP001", # File is part of implicit namespace package (acceptable)
+    "ERA001", # Found commented-out code (acceptable for generated files)
+    "SLF001", # Private member accessed (acceptable for generated protobuf)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"python/src/sensor_data_pb2.py" = ["E402", "F401", "Q000", "COM812", "E501"]
+"python/src/publisher.py" = ["T201", "BLE001", "EM101", "EM102", "TRY003", "ARG002", "Q000", "COM812", "E501"]
+"python/src/subscriber.py" = ["T201", "BLE001", "EM101", "EM102", "TRY003", "ARG002", "Q000", "COM812", "E501", "I001", "RET505"]
+"benchmarks/benchmark.py" = ["T201", "BLE001", "EM101", "EM102", "TRY003", "ARG002", "Q000", "COM812", "E501"]
+"benchmarks/analyze_results.py" = ["T201", "BLE001", "EM101", "EM102", "TRY003", "ARG002", "Q000", "COM812", "E501"]
+"benchmarks/run_all.py" = ["T201", "BLE001", "EM101", "EM102", "TRY003", "ARG002", "Q000", "COM812", "E501"]
+"tools/render_reports.py" = ["T201", "BLE001", "EM101", "EM102", "TRY003", "ARG002", "Q000", "COM812", "E501", "I001", "C901", "PLW2901", "SIM105", "S110", "DTZ003", "PTH207", "PERF401", "W291", "N806"]
+"summarize_phase.py" = ["T201", "BLE001", "EM101", "EM102", "TRY003", "ARG002", "Q000", "COM812", "E501", "PLR2004", "DTZ005", "PTH123"]

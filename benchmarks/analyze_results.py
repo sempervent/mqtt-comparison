@@ -9,7 +9,6 @@ import json
 import os
 import pandas as pd
 from pathlib import Path
-from typing import List, Dict, Any
 import argparse
 
 
@@ -32,7 +31,7 @@ class ResultsAnalyzer:
             if lang_dir.is_dir():
                 results_file = lang_dir / "benchmark_results.json"
                 if results_file.exists():
-                    with open(results_file, 'r') as f:
+                    with open(results_file) as f:
                         lang_results = json.load(f)
                         self.results.extend(lang_results)
     
